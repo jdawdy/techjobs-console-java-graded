@@ -72,7 +72,6 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
-
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
@@ -80,6 +79,8 @@ public class JobData {
             String aValue = row.get(column);
 
             if (aValue.contains(value)) {
+                jobs.add(row);
+            } else if (aValue.toLowerCase().contains(value.toLowerCase())){
                 jobs.add(row);
             }
         }
@@ -94,12 +95,21 @@ public class JobData {
      * @return      List of all jobs with at least one field containing the value
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
-
         // load data, if not already loaded
         loadData();
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        for (HashMap<String, String> job: allJobs) {
+            String aValue = job.get(value);
 
+            if (aValue.contains(value)) {
+                jobs.add(job);
+            } else if (aValue.toLowerCase().contains(value.toLowerCase())){
+                jobs.add(job);
+            }
+        }
         // TODO - implement this method
-        return null;
+
+        return jobs;
     }
 
     /**
